@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashutosh Sharma - UI/UX Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: '#4f46e5',
+              secondary: '#ec4899',
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Hide custom cursor on touch devices */
+        @media (pointer: coarse) {
+            .cursor, .cursor-follower {
+                display: none !important;
+            }
+        }
+        /* Show custom cursor on non-touch devices */
+        @media (pointer: fine) {
+            body {
+                cursor: none;
+            }
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        /* Cursor Styles */
+        .cursor, .cursor-follower {
+            position: fixed;
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background-color: #4f46e5;
+            transition: transform 0.1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #4f46e5;
+            transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1),
+                        background-color 0.2s, border-color 0.2s;
+        }
+        .cursor.hover-effect {
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        .cursor-follower.hover-effect {
+            transform: translate(-50%, -50%) scale(1.8);
+            background-color: rgba(79, 70, 229, 0.1);
+            border-color: transparent;
+        }
+        
+        .dark .cursor { background-color: #818cf8; }
+        .dark .cursor-follower { border-color: #818cf8; }
+        .dark .cursor-follower.hover-effect { background-color: rgba(129, 140, 248, 0.15); }
+
+        /* Button Shine Effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-shine:active { transform: scale(0.97); }
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn-shine:hover::before { left: 100%; }
+
+        /* Nav Link Underline */
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 100%; height: 2px;
+            bottom: -2px; left: 0; background-color: #4f46e5;
+            transform: scaleX(0); transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: scaleX(1); transform-origin: bottom left;
+        }
+        .dark .nav-link:hover::after, .dark .nav-link.active::after {
+            background-color: #818cf8;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #4f46e5, #ec4899);
+        }
+        .dark .text-gradient {
+            background-image: linear-gradient(to right, #818cf8, #f472b6);
+        }
+
+        /* Animated Background Blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 40px); }
+        }
+
+        /* Scroll Progress */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(to right, #4f46e5, #ec4899);
+            z-index: 10000; width: 0%; transition: width 0.1s linear;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react-intersection-observer": "https://esm.sh/react-intersection-observer@^10.0.0",
+    "framer-motion": "https://esm.sh/framer-motion@^11.0.0"
+  }
+}
+</script>
+</head>
+<body class="antialiased bg-gray-50 text-slate-900 dark:bg-[#020617] dark:text-slate-200 transition-colors duration-500">
+    <div id="root"></div>
+</body>
+</html>
