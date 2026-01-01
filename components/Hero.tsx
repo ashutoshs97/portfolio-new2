@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="text-lg md:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
                     >
-                        A <span className="text-slate-900 dark:text-white font-semibold">Product Designer</span> focused on creating intuitive, user-centric interfaces that drive business growth and user satisfaction.
+                        A <span className="text-slate-900 dark:text-white font-semibold">Product Designer & UI/UX Specialist</span> focused on creating intuitive, user-centric interfaces that drive business growth and user satisfaction.
                     </motion.p>
                     
                     {/* CTA Buttons */}

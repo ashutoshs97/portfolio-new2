@@ -27,7 +27,7 @@ const About: React.FC = () => {
                     <motion.h2 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">About Me</motion.h2>
                     <motion.div variants={{ hidden: { opacity: 0, scaleX: 0 }, visible: { opacity: 1, scaleX: 1 } }} className="w-24 h-1 bg-indigo-600 dark:bg-indigo-500 mx-auto mb-8 rounded-full origin-center transition-transform"></motion.div>
                     <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                        I am a driven <span className="text-indigo-600 dark:text-indigo-400 font-bold">UX Designer</span> focused on crafting intuitive and impactful digital products. I combine a strong foundation in UI/UX principles with technical knowledge in web development and emerging AI technologies to bridge the gap between aesthetic excellence and functional efficiency.
+                        I am a driven <span className="text-indigo-600 dark:text-indigo-400 font-bold">Product Designer & UI/UX Specialist</span> focused on crafting intuitive and impactful digital products. I combine a strong foundation in UI/UX principles with technical knowledge in web development and emerging AI technologies to bridge the gap between aesthetic excellence and functional efficiency.
                     </motion.p>
                 </motion.div>
             </div>
