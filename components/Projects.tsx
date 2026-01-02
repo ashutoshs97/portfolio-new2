@@ -4,7 +4,7 @@ import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const projects: Project[] = [
-    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'https://picsum.photos/600/400?random=1' },
+    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images\saltoris-mobile-design.png' },
     { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'https://picsum.photos/600/400?random=2' },
     { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'https://picsum.photos/600/400?random=3' },
     { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'https://picsum.photos/600/400?random=4' },
