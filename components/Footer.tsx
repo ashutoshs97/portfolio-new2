@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="py-8 bg-[#f3f4f6] dark:bg-[#0F172A] border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-                <p className="text-gray-500 dark:text-gray-400">&copy; {currentYear} Ashutosh Sharma. All rights reserved.</p>
+                <p className="text-gray-600 dark:text-gray-400">&copy; {currentYear} Ashutosh Sharma. All rights reserved.</p>
                 <div className="flex justify-center space-x-6 mt-4 flex-wrap">
                     {links.map((link, idx) => (
                         <a 
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
                             href={link.url} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-hover p-2"
+                            className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-hover p-3 m-1"
                             aria-label={link.label}
                         >
                             {link.icon}

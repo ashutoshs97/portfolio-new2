@@ -89,7 +89,7 @@ const Header: React.FC = () => {
                             <li>
                                 <button 
                                     onClick={toggleTheme} 
-                                    className="ml-4 p-2.5 rounded-full bg-gray-100 dark:bg-slate-800 text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 transition-colors cursor-hover"
+                                    className="ml-4 p-3 rounded-full bg-gray-100 dark:bg-slate-800 text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 transition-colors cursor-hover"
                                     aria-label="Toggle Theme"
                                 >
                                     {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -102,13 +102,13 @@ const Header: React.FC = () => {
                     <div className="md:hidden flex items-center">
                         <button 
                             onClick={toggleTheme} 
-                            className="mr-4 p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                            className="mr-2 p-3 rounded-full bg-gray-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
                         >
                             {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                         </button>
                         <button 
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="text-slate-900 dark:text-white"
+                            className="text-slate-900 dark:text-white p-3 -mr-3 rounded-full"
                         >
                             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>

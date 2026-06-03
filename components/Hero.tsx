@@ -182,7 +182,7 @@ const Hero: React.FC = () => {
                 transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
             >
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">Scroll</span>
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Scroll</span>
                 <div className="w-[1px] h-16 bg-gradient-to-b from-slate-300 to-transparent dark:from-slate-700 dark:to-transparent relative overflow-hidden rounded-full">
                     <motion.div 
                         animate={{ y: [0, 64] }}
