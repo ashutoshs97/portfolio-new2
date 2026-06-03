@@ -38,7 +38,7 @@ const education: EduType[] = [
         id: 1,
         degree: "Master of Computer Applications (MCA)",
         institution: "Vivekananda Institute of Professional Studies",
-        period: "Expected: 2024 – 2026"
+        period: "9.034 | 2024 - 2026"
     },
     {
         id: 2,
