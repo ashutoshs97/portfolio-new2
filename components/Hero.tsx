@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="text-lg md:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed"
                     >
-                        A <span className="text-slate-900 dark:text-white font-semibold">Product Designer & UI/UX Specialist</span> focused on creating intuitive, user-centric interfaces that drive business growth and user satisfaction.
+                        I craft intuitive, user-centric digital experiences that balance aesthetic excellence with business goals, driving growth and engagement.
                     </motion.p>
                     
                     {/* CTA Buttons */}
@@ -155,6 +155,14 @@ const Hero: React.FC = () => {
                             <span className="mr-2">Explore Projects</span>
                             <ArrowDown className="transition-transform group-hover:translate-y-1" size={20} />
                             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        </a>
+                        <a 
+                            href="https://linkly.link/29k4Z" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="inline-flex h-14 items-center justify-center rounded-full border-2 border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 px-8 text-base font-bold text-indigo-700 dark:text-indigo-300 transition-all hover:bg-indigo-100 dark:hover:bg-indigo-900/40 cursor-hover shadow-[0_0_15px_rgba(79,70,229,0.2)]"
+                        >
+                            Download Resume
                         </a>
                         <a 
                             href="#contact" 

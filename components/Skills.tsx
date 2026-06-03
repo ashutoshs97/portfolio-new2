@@ -72,18 +72,38 @@ const Skills: React.FC = () => {
                                 }
                             }
                         }}
-                        className="space-y-6"
+                        className="space-y-8"
                     >
-                        <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-2xl font-bold text-slate-900 dark:text-white">Holistic Approach</motion.h3>
-                        <motion.p variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                            This visualization represents my balanced expertise. My strongest assets lie in <span className="text-indigo-600 dark:text-indigo-400 font-semibold">UI/UX Design</span> and proficiency with tools like <span className="text-indigo-600 dark:text-indigo-400 font-semibold">Figma</span>.
-                        </motion.p>
-                        <motion.p variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                            However, my background in <span className="text-pink-600 dark:text-pink-400 font-semibold">Web Development</span> allows me to communicate effectively with engineering teams, ensuring that my designs are not just beautiful, but feasible and performant.
-                        </motion.p>
-                        <motion.p variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                             I am also deeply invested in <span className="text-purple-600 dark:text-purple-400 font-semibold">Generative AI</span> workflows to accelerate ideation and asset creation.
-                        </motion.p>
+                        <div>
+                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Design & Research</motion.h3>
+                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                                {['UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Design Systems'].map(skill => (
+                                    <span key={skill} className="px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl text-sm font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-indigo-100 dark:border-indigo-800/50">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </motion.div>
+                        </div>
+                        <div>
+                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Tools & Technologies</motion.h3>
+                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                                {['Figma', 'Adobe Creative Suite', 'Framer', 'Webflow', 'Generative AI'].map(skill => (
+                                    <span key={skill} className="px-4 py-2 bg-pink-50 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-xl text-sm font-semibold hover:bg-pink-100 dark:hover:bg-pink-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-pink-100 dark:border-pink-800/50">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </motion.div>
+                        </div>
+                        <div>
+                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Development</motion.h3>
+                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                                {['HTML/CSS', 'JavaScript', 'React JS', 'Tailwind CSS'].map(skill => (
+                                    <span key={skill} className="px-4 py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-xl text-sm font-semibold hover:bg-purple-100 dark:hover:bg-purple-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-purple-100 dark:border-purple-800/50">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </div>
