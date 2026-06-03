@@ -74,36 +74,36 @@ const Skills: React.FC = () => {
                         }}
                         className="space-y-8"
                     >
-                        <div>
-                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Design & Research</motion.h3>
-                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                        <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Design & Research</h3>
+                            <div className="flex flex-wrap gap-3">
                                 {['UI/UX Design', 'Wireframing', 'Prototyping', 'User Research', 'Design Systems'].map(skill => (
                                     <span key={skill} className="px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-xl text-sm font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-indigo-100 dark:border-indigo-800/50">
                                         {skill}
                                     </span>
                                 ))}
-                            </motion.div>
-                        </div>
-                        <div>
-                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Tools & Technologies</motion.h3>
-                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                            </div>
+                        </motion.div>
+                        <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Tools & Technologies</h3>
+                            <div className="flex flex-wrap gap-3">
                                 {['Figma', 'Adobe Creative Suite', 'Framer', 'Webflow', 'Generative AI'].map(skill => (
                                     <span key={skill} className="px-4 py-2 bg-pink-50 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-xl text-sm font-semibold hover:bg-pink-100 dark:hover:bg-pink-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-pink-100 dark:border-pink-800/50">
                                         {skill}
                                     </span>
                                 ))}
-                            </motion.div>
-                        </div>
-                        <div>
-                            <motion.h3 variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="text-xl font-bold text-slate-900 dark:text-white mb-4">Development</motion.h3>
-                            <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }} className="flex flex-wrap gap-3">
+                            </div>
+                        </motion.div>
+                        <motion.div variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}>
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Development</h3>
+                            <div className="flex flex-wrap gap-3">
                                 {['HTML/CSS', 'JavaScript', 'React JS', 'Tailwind CSS'].map(skill => (
                                     <span key={skill} className="px-4 py-2 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-xl text-sm font-semibold hover:bg-purple-100 dark:hover:bg-purple-800/50 hover:scale-105 transition-all cursor-hover shadow-sm border border-purple-100 dark:border-purple-800/50">
                                         {skill}
                                     </span>
                                 ))}
-                            </motion.div>
-                        </div>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
