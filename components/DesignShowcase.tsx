@@ -77,7 +77,7 @@ const DesignShowcase: React.FC = () => {
                         <div 
                             key={design.id} 
                             onClick={() => handleImageClick(design.image)}
-                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px] transition-transform duration-300 hover:scale-[1.02]"
+                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px]"
                         >
                             <div className="w-full h-full rounded-xl overflow-hidden relative">
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
@@ -92,7 +92,7 @@ const DesignShowcase: React.FC = () => {
                         <div 
                             key={design.id} 
                             onClick={() => handleImageClick(design.image)}
-                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px] transition-transform duration-300 hover:scale-[1.02]"
+                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px]"
                         >
                             <div className="w-full h-full rounded-xl overflow-hidden relative">
                                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />

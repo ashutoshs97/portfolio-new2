@@ -10,11 +10,14 @@ interface Message {
 }
 
 const predefinedAnswers: Record<string, string> = {
-    "experience": "I have around 1.5 years of solid experience working with companies like Saltoris, Pennyupp, Bondspe, and Picxele as a UI/UX & Product Designer. I'm currently designing digital experiences at Nap Works!",
+    "experience": "I have 2+ years of solid experience working with companies like Saltoris, Pennyupp, Bondspe, and Picxele as a UI/UX & Product Designer. I'm currently designing digital experiences at Nap Works!",
     "skills": "My core skills are UI/UX Design, Wireframing, Prototyping, and Design Systems. I use Figma, Framer, and Webflow. On the development side, I know React, Tailwind CSS, and standard web technologies.",
     "education": "I'm currently pursuing my MCA from Vivekananda Institute of Professional Studies (2024-2026), and I completed my BCA from Maharaja Surajmal Institute with a 9.025 GPA.",
+    "projects": "I've designed mobile apps like Saltoris and Penny Upp, and web platforms like Bondspe and Profit Plum. Scroll down to my Projects section to see my featured work!",
+    "philosophy": "I believe in bridging the gap between aesthetic excellence and functional efficiency. Good design is intuitive, accessible, and solves real user problems.",
+    "location": "I'm based in New Delhi, India! However, I am open to remote opportunities globally.",
     "contact": "You can reach out to me via the contact form at the bottom of the page, or download my resume from the Hero section!",
-    "default": "I'm a smart interactive agent! Ask me about Ashutosh's 'experience', 'skills', 'education', or 'contact' to learn more."
+    "default": "I'm a smart interactive agent! Try clicking one of the quick prompts below."
 };
 
 const Chatbot: React.FC = () => {
@@ -35,11 +38,11 @@ const Chatbot: React.FC = () => {
 
     const handlePrompt = (topic: string) => {
         playSound();
-        const userMsg = { id: Date.now(), text: `Tell me about his ${topic}.`, sender: 'user' as const };
+        const userMsg = { id: Date.now(), text: `Tell me about his ${topic.toLowerCase()}.`, sender: 'user' as const };
         setMessages(prev => [...prev, userMsg]);
 
         setTimeout(() => {
-            const botMsg = { id: Date.now() + 1, text: predefinedAnswers[topic] || predefinedAnswers['default'], sender: 'bot' as const };
+            const botMsg = { id: Date.now() + 1, text: predefinedAnswers[topic.toLowerCase()] || predefinedAnswers['default'], sender: 'bot' as const };
             setMessages(prev => [...prev, botMsg]);
         }, 600);
     };
@@ -52,7 +55,7 @@ const Chatbot: React.FC = () => {
                         initial={{ opacity: 0, y: 20, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                        className="absolute bottom-16 right-0 w-[320px] md:w-[380px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-gray-200 dark:border-slate-700 shadow-2xl rounded-2xl overflow-hidden flex flex-col h-[450px]"
+                        className="absolute bottom-16 right-0 w-[320px] md:w-[380px] bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-gray-200 dark:border-slate-700 shadow-2xl rounded-2xl overflow-hidden flex flex-col h-[480px]"
                     >
                         <div className="bg-indigo-600 p-4 flex justify-between items-center text-white">
                             <div className="flex items-center gap-2">
@@ -81,11 +84,11 @@ const Chatbot: React.FC = () => {
                         <div className="p-4 border-t border-gray-200 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-800/50 backdrop-blur-md">
                             <p className="text-xs text-slate-500 mb-2 font-medium">Quick Prompts:</p>
                             <div className="flex flex-wrap gap-2">
-                                {['Experience', 'Skills', 'Education', 'Contact'].map(topic => (
+                                {['Experience', 'Skills', 'Projects', 'Philosophy', 'Location', 'Contact'].map(topic => (
                                     <button 
                                         key={topic}
-                                        onClick={() => handlePrompt(topic.toLowerCase())}
-                                        className="text-xs bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 px-3 py-1.5 rounded-full hover:bg-indigo-50 dark:hover:bg-slate-600 hover:border-indigo-200 transition-colors text-slate-700 dark:text-slate-300"
+                                        onClick={() => handlePrompt(topic)}
+                                        className="text-[11px] bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 px-3 py-1.5 rounded-full hover:bg-indigo-50 dark:hover:bg-slate-600 hover:border-indigo-200 transition-colors text-slate-700 dark:text-slate-300 shadow-sm"
                                     >
                                         {topic}
                                     </button>
