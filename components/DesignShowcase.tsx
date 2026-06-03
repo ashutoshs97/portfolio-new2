@@ -23,7 +23,14 @@ const designImages = [
     'images/saltoris-web-design.png',
     'images/saltoris.png',
     'images/sign-up-page.png',
-    'images/testcase.png'
+    'images/testcase.png',
+    'images/Louvre Dating App.png',
+    'images/Napworks Website.png',
+    'images/SI Track Landing Page.png',
+    'images/SI Track Web Admin Dashboard for Virtual Inspection.png',
+    'images/SI Track Web Admin Dashboard.png',
+    'images/Virtual Inspection App Design.png',
+    'images/FlowDance Landing Page.png'
 ];
 
 const designs = designImages.map((img, i) => ({
