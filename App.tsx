@@ -14,7 +14,6 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
-import ImageTrail from './components/ImageTrail';
 import Chatbot from './components/Chatbot';
 import Lenis from 'lenis';
 
@@ -122,7 +121,6 @@ const AppContent: React.FC = () => {
         <>
             <div id="progress-bar"></div>
             <CustomCursor />
-            <ImageTrail />
             <Chatbot />
             
             {isPreloading ? (

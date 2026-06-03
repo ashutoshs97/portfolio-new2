@@ -3,7 +3,6 @@ import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence, useTransform, useSpring, useMotionValue, useScroll } from 'framer-motion';
 import { ArrowDown, Layout, MousePointer2 } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-import Spline from '@splinetool/react-spline';
 
 const Hero: React.FC = () => {
     const [currentVerbIndex, setCurrentVerbIndex] = useState(0);
@@ -73,11 +72,6 @@ const Hero: React.FC = () => {
         <section id="hero" ref={ref} className="relative flex items-center justify-center min-h-screen pt-16 overflow-hidden bg-gray-50 dark:bg-[#020617] transition-colors duration-300 perspective-1000">
             {/* Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-            {/* Spline 3D Scene */}
-            <div className="absolute inset-0 z-0 opacity-40 dark:opacity-60 mix-blend-multiply dark:mix-blend-screen pointer-events-auto cursor-grab active:cursor-grabbing">
-                <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
-            </div>
 
             {/* Parallax Blobs */}
             <motion.div style={{ y: scrollParallax1 }} className="absolute inset-0 pointer-events-none">
