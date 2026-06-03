@@ -4,19 +4,19 @@ import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const projects: Project[] = [
-    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images/saltoris-mobile-design.png' },
-    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'images/pennyupp-app-design.png' },
-    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'images/bondspe-website-redesign.png' },
-    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'images/saltoris-web-design.png' },
-    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', image: 'images/bondspe-app.png' },
-    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', image: 'images/profit-plum-website.png' },
-    { id: 7, title: 'Louvre Dating App', category: 'mobile', description: 'UI/UX design for a modern dating application.', image: 'images/Louvre Dating App.png' },
-    { id: 8, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', image: 'images/Napworks Website.png' },
-    { id: 9, title: 'SI Track Landing Page', category: 'web', description: 'Landing page design for the SI Track platform.', image: 'images/SI Track Landing Page.png' },
-    { id: 10, title: 'SI Track Virtual Inspection Dashboard', category: 'web', description: 'Web admin dashboard interface for virtual inspections.', image: 'images/SI Track Web Admin Dashboard for Virtual Inspection.png' },
-    { id: 11, title: 'SI Track Admin Dashboard', category: 'web', description: 'Comprehensive web admin dashboard design.', image: 'images/SI Track Web Admin Dashboard.png' },
-    { id: 12, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual inspections.', image: 'images/Virtual Inspection App Design.png' },
-    { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', image: 'images/FlowDance Landing Page.png' },
+    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images/saltoris-mobile-design.webp' },
+    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'images/pennyupp-app-design.webp' },
+    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'images/bondspe-website-redesign.webp' },
+    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'images/saltoris-web-design.webp' },
+    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', image: 'images/bondspe-app.webp' },
+    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', image: 'images/profit-plum-website.webp' },
+    { id: 7, title: 'Louvre Dating App', category: 'mobile', description: 'UI/UX design for a modern dating application.', image: 'images/Louvre Dating App.webp' },
+    { id: 8, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', image: 'images/Napworks Website.webp' },
+    { id: 9, title: 'SI Track Landing Page', category: 'web', description: 'Landing page design for the SI Track platform.', image: 'images/SI Track Landing Page.webp' },
+    { id: 10, title: 'SI Track Virtual Inspection Dashboard', category: 'web', description: 'Web admin dashboard interface for virtual inspections.', image: 'images/SI Track Web Admin Dashboard for Virtual Inspection.webp' },
+    { id: 11, title: 'SI Track Admin Dashboard', category: 'web', description: 'Comprehensive web admin dashboard design.', image: 'images/SI Track Web Admin Dashboard.webp' },
+    { id: 12, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual inspections.', image: 'images/Virtual Inspection App Design.webp' },
+    { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', image: 'images/FlowDance Landing Page.webp' },
 ];
 
 const Projects: React.FC = () => {
