@@ -2,9 +2,33 @@ import React, { useState } from 'react';
 import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const designs = Array.from({ length: 12 }, (_, i) => ({
+const designImages = [
+    'images/Checkout.png',
+    'images/Home Page.png',
+    'images/KYC.png',
+    'images/bondspe-app.png',
+    'images/bondspe-website-redesign.png',
+    'images/brief.png',
+    'images/checkout (2).png',
+    'images/design-showcase-9.png',
+    'images/design-showcase-10.png',
+    'images/design-showcase-11.png',
+    'images/design-showcase-12.png',
+    'images/kyc2.png',
+    'images/pennyupp-app-design.png',
+    'images/profit-plum-website.png',
+    'images/profit-plum.png',
+    'images/profitplum.png',
+    'images/saltoris-mobile-design.png',
+    'images/saltoris-web-design.png',
+    'images/saltoris.png',
+    'images/sign-up-page.png',
+    'images/testcase.png'
+];
+
+const designs = designImages.map((img, i) => ({
     id: i + 1,
-    image: `https://picsum.photos/500/500?random=${i + 10}`
+    image: img
 }));
 
 const DesignShowcase: React.FC = () => {

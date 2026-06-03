@@ -5,15 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const projects: Project[] = [
     { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images/saltoris-mobile-design.png' },
-    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'https://picsum.photos/600/400?random=2' },
-    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'https://picsum.photos/600/400?random=3' },
-    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'https://picsum.photos/600/400?random=4' },
-    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', image: 'https://picsum.photos/600/400?random=5' },
-    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', image: 'https://picsum.photos/600/400?random=6' },
-    { id: 7, title: 'Roofing Website Design', category: 'web', description: 'Professional roofing service website designed for trust and conversion.', image: 'https://picsum.photos/600/400?random=7' },
-    { id: 8, title: 'Chimney Website Design', category: 'web', description: 'Clean, modern interface for chimney repair and maintenance services.', image: 'https://picsum.photos/600/400?random=8' },
-    { id: 9, title: 'Exterior Painting Website Design', category: 'web', description: 'Visual-centric design showcasing premium exterior painting projects.', image: 'https://picsum.photos/600/400?random=9' },
-    { id: 10, title: 'Landscaping Website Design', category: 'web', description: 'Organic and green-themed portfolio site for landscaping services.', image: 'https://picsum.photos/600/400?random=10' },
+    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'images/pennyupp-app-design.png' },
+    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'images/bondspe-website-redesign.png' },
+    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'images/saltoris-web-design.png' },
+    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', image: 'images/bondspe-app.png' },
+    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', image: 'images/profit-plum-website.png' },
 ];
 
 const Projects: React.FC = () => {

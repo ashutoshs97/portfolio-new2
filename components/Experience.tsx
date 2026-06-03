@@ -4,6 +4,13 @@ import { motion } from 'framer-motion';
 
 const experiences: ExpType[] = [
     {
+        id: 4,
+        role: "UI UX Designer",
+        company: "Nap Works",
+        period: "Feb 2026 - Present",
+        description: "As a UI/UX Designer at NAP Works Pvt. Ltd., I work closely with the Software Development team to craft intuitive, user-centric digital experiences. My focus is on translating complex requirements into clean, functional designs and seamless user journeys from wireframes to high-fidelity prototypes."
+    },
+    {
         id: 1,
         role: "Product Designer",
         company: "Saltoris",
