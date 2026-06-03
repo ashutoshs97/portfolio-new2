@@ -34,13 +34,20 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className, on
         y.set(0);
     };
 
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+            navigator.vibrate(50); // Haptic feedback
+        }
+        if (onClick) onClick(e);
+    };
+
     return (
         <motion.div
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
-            onClick={onClick}
+            onClick={handleClick}
             style={{ x, y }}
             className={`inline-block ${className || ''}`}
         >

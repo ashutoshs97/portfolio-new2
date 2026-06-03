@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Project } from '../types';
 import { useClickSound } from '../hooks/useSound';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useVelocity, useSpring, useTransform } from 'framer-motion';
 
 const projects: Project[] = [
     { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images/saltoris-mobile-design.webp' },
@@ -22,6 +22,8 @@ const projects: Project[] = [
 const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+    const filterId = `liquid-${project.id}`;
 
     const handleMouseMove = (e: React.MouseEvent) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -36,8 +38,26 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.4 }}
             onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             className="group relative rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 hover:shadow-2xl transition-all duration-300 cursor-hover"
         >
+            {/* SVG Filter for Liquid Distortion */}
+            <svg className="absolute w-0 h-0 pointer-events-none">
+                <filter id={filterId}>
+                    <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="1" result="noise" />
+                    <motion.feDisplacementMap 
+                        in="SourceGraphic" 
+                        in2="noise" 
+                        xChannelSelector="R" 
+                        yChannelSelector="G" 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: isHovered ? 30 : 0 }}
+                        transition={{ duration: 0.8, type: "spring" }}
+                    />
+                </filter>
+            </svg>
+
             <div 
                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-20 mix-blend-overlay"
                style={{
@@ -49,11 +69,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                     <div className="absolute inset-0 animate-pulse bg-slate-300 dark:bg-slate-600 z-20" />
                 )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
-                <img 
+                <motion.img 
                     className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                     src={project.image} 
                     alt={project.title} 
                     onLoad={() => setIsLoaded(true)}
+                    style={{ filter: isHovered ? `url(#${filterId})` : 'none' }}
                 />
             </div>
             <div className="p-8 relative z-10">
@@ -68,6 +89,12 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 const Projects: React.FC = () => {
     const [filter, setFilter] = useState<'all' | 'mobile' | 'web'>('all');
     const playSound = useClickSound();
+    
+    const { scrollY } = useScroll();
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+    const skewVelocity = useTransform(smoothVelocity, [-1000, 1000], [10, -10]);
+    const scaleVelocity = useTransform(smoothVelocity, [-1000, 0, 1000], [1.1, 1, 1.1]);
 
     const filteredProjects = projects.filter(p => filter === 'all' || p.category === filter);
 
@@ -80,7 +107,13 @@ const Projects: React.FC = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Featured Projects</h2>
+                    <motion.h2 
+                        style={{ skewX: skewVelocity, scale: scaleVelocity }}
+                        className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 display-font inline-block transform-origin-bottom"
+                    >
+                        Featured Projects
+                    </motion.h2>
+                    <br />
                     
                     <div className="flex justify-center space-x-2 p-1.5 bg-white dark:bg-slate-800 shadow-sm inline-flex rounded-full border border-gray-200 dark:border-slate-700">
                         {['all', 'mobile', 'web'].map((f) => (

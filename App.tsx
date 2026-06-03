@@ -14,6 +14,9 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
+import ImageTrail from './components/ImageTrail';
+import Chatbot from './components/Chatbot';
+import Lenis from 'lenis';
 
 const Home: React.FC = () => {
     return (
@@ -41,6 +44,21 @@ const AppContent: React.FC = () => {
     const location = useLocation();
 
     useEffect(() => {
+        // Initialize Lenis for Smooth Scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+        });
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
         // Scroll Progress
         const handleScroll = () => {
             const progressBar = document.getElementById('progress-bar');
@@ -53,7 +71,10 @@ const AppContent: React.FC = () => {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            lenis.destroy();
+        };
     }, []);
 
     // Initial theme check & Dynamic Favicon
@@ -101,6 +122,8 @@ const AppContent: React.FC = () => {
         <>
             <div id="progress-bar"></div>
             <CustomCursor />
+            <ImageTrail />
+            <Chatbot />
             
             {isPreloading ? (
                 <Preloader onComplete={() => setIsPreloading(false)} />

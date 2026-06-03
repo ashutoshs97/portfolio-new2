@@ -3,6 +3,7 @@ import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence, useTransform, useSpring, useMotionValue, useScroll } from 'framer-motion';
 import { ArrowDown, Layout, MousePointer2 } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import Spline from '@splinetool/react-spline';
 
 const Hero: React.FC = () => {
     const [currentVerbIndex, setCurrentVerbIndex] = useState(0);
@@ -26,6 +27,15 @@ const Hero: React.FC = () => {
         return () => clearInterval(timer);
     }, []);
     const timeString = time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+    const getGreeting = () => {
+        const hour = time.getHours();
+        if (hour < 5) return "Burning the midnight oil?";
+        if (hour < 12) return "Good morning";
+        if (hour < 17) return "Good afternoon";
+        if (hour < 21) return "Good evening";
+        return "Working late?";
+    };
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -63,6 +73,11 @@ const Hero: React.FC = () => {
         <section id="hero" ref={ref} className="relative flex items-center justify-center min-h-screen pt-16 overflow-hidden bg-gray-50 dark:bg-[#020617] transition-colors duration-300 perspective-1000">
             {/* Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+
+            {/* Spline 3D Scene */}
+            <div className="absolute inset-0 z-0 opacity-40 dark:opacity-60 mix-blend-multiply dark:mix-blend-screen pointer-events-auto cursor-grab active:cursor-grabbing">
+                <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
+            </div>
 
             {/* Parallax Blobs */}
             <motion.div style={{ y: scrollParallax1 }} className="absolute inset-0 pointer-events-none">
@@ -114,6 +129,9 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.5 }}
                         className="flex flex-wrap justify-start md:justify-center items-center gap-3 mb-8"
                     >
+                         <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-gray-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm font-bold shadow-sm">
+                            {getGreeting()}!
+                        </span>
                          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-sm font-semibold shadow-sm backdrop-blur-sm">
                             <span className="relative flex h-2.5 w-2.5">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>

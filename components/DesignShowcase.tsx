@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useClickSound } from '../hooks/useSound';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useVelocity, useSpring, useTransform } from 'framer-motion';
 import Marquee from 'react-fast-marquee';
 
 const designImages = [
@@ -43,6 +43,11 @@ const DesignShowcase: React.FC = () => {
     const [activeImage, setActiveImage] = useState<string | null>(null);
     const playSound = useClickSound();
 
+    const { scrollY } = useScroll();
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+    const skewVelocity = useTransform(smoothVelocity, [-1000, 1000], [15, -15]);
+
     const handleImageClick = (image: string) => {
         playSound();
         setActiveImage(image);
@@ -65,8 +70,8 @@ const DesignShowcase: React.FC = () => {
                 </motion.div>
             </div>
                 
-            {/* Infinite Marquees */}
-            <div className="w-full">
+            {/* Infinite Marquees with Scroll Velocity Skew */}
+            <motion.div style={{ skewY: skewVelocity }} className="w-full">
                 <Marquee gradient={false} speed={40} pauseOnHover={true} className="mb-8 overflow-hidden py-4">
                     {topRow.map((design) => (
                         <div 
@@ -96,7 +101,7 @@ const DesignShowcase: React.FC = () => {
                         </div>
                     ))}
                 </Marquee>
-            </div>
+            </motion.div>
 
             <div className="text-center mt-12 space-y-6">
                 <div className="block mt-4">
