@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Experience as ExpType, Education as EduType } from '../types';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 
 const experiences: ExpType[] = [
     {
@@ -49,6 +49,18 @@ const education: EduType[] = [
 ];
 
 const Experience: React.FC = () => {
+    const expRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress: expProgress } = useScroll({ 
+        target: expRef, 
+        offset: ["start center", "end center"] 
+    });
+
+    const eduRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress: eduProgress } = useScroll({ 
+        target: eduRef, 
+        offset: ["start center", "end center"] 
+    });
+
     return (
         <section id="experience" className="py-24 md:py-32 bg-gray-50 dark:bg-[#020617] transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -65,23 +77,31 @@ const Experience: React.FC = () => {
                             <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Experience</h2>
                         </motion.div>
                         
-                        <div className="relative border-l-2 border-indigo-200 dark:border-slate-700 ml-4 md:ml-6 space-y-12">
+                        <div ref={expRef} className="relative ml-4 md:ml-6 space-y-12">
+                            {/* Static Background Line */}
+                            <div className="absolute left-[7px] top-6 bottom-0 w-[2px] bg-indigo-200 dark:bg-slate-800" />
+                            {/* Animated Scroll Progress Line */}
+                            <motion.div 
+                                style={{ scaleY: expProgress, transformOrigin: "top" }} 
+                                className="absolute left-[7px] top-6 bottom-0 w-[2px] bg-indigo-600 z-10" 
+                            />
+
                             {experiences.map((exp, index) => (
                                 <motion.div 
                                     key={exp.id}
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "-100px" }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                     className="pl-8 md:pl-12 relative timeline-item group"
                                 >
                                     {/* Dot */}
-                                    <div className="absolute -left-[9px] top-6 w-5 h-5 rounded-full border-4 border-white dark:border-[#020617] bg-indigo-600 transition-transform duration-300 group-hover:scale-125" />
+                                    <div className="absolute -left-[3px] top-6 w-5 h-5 rounded-full border-4 border-white dark:border-[#020617] bg-indigo-600 transition-transform duration-300 group-hover:scale-125 z-20" />
                                     
-                                    <div className="card p-8 rounded-2xl bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                    <div className="card p-8 rounded-2xl bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative z-20">
                                         <div className="flex flex-wrap justify-between items-start mb-2">
                                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{exp.role}</h3>
-                                            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-full">{exp.period}</span>
+                                            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-full mt-2 sm:mt-0">{exp.period}</span>
                                         </div>
                                         <p className="text-slate-500 dark:text-slate-400 font-medium mb-4">{exp.company}</p>
                                         <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{exp.description}</p>
@@ -104,20 +124,28 @@ const Experience: React.FC = () => {
                             <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Education</h2>
                         </motion.div>
 
-                        <div className="relative border-l-2 border-pink-200 dark:border-slate-700 ml-4 md:ml-6 space-y-12">
+                        <div ref={eduRef} className="relative ml-4 md:ml-6 space-y-12">
+                            {/* Static Background Line */}
+                            <div className="absolute left-[7px] top-6 bottom-0 w-[2px] bg-pink-200 dark:bg-slate-800" />
+                            {/* Animated Scroll Progress Line */}
+                            <motion.div 
+                                style={{ scaleY: eduProgress, transformOrigin: "top" }} 
+                                className="absolute left-[7px] top-6 bottom-0 w-[2px] bg-pink-600 z-10" 
+                            />
+
                             {education.map((edu, index) => (
                                 <motion.div 
                                     key={edu.id}
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true, margin: "-50px" }}
+                                    viewport={{ once: true, margin: "-100px" }}
                                     transition={{ duration: 0.5, delay: index * 0.1 + 0.2 }}
                                     className="pl-8 md:pl-12 relative timeline-item group"
                                 >
                                      {/* Dot */}
-                                     <div className="absolute -left-[9px] top-6 w-5 h-5 rounded-full border-4 border-white dark:border-[#020617] bg-pink-600 transition-transform duration-300 group-hover:scale-125" />
+                                     <div className="absolute -left-[3px] top-6 w-5 h-5 rounded-full border-4 border-white dark:border-[#020617] bg-pink-600 transition-transform duration-300 group-hover:scale-125 z-20" />
 
-                                    <div className="card p-8 rounded-2xl bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                                    <div className="card p-8 rounded-2xl bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative z-20">
                                         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">{edu.degree}</h3>
                                         <p className="text-pink-600 dark:text-pink-400 mb-2 font-medium">{edu.institution}</p>
                                         <p className="text-slate-500 dark:text-slate-400 text-sm">{edu.period}</p>

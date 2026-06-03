@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
+import MagneticButton from './MagneticButton';
 
 const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -78,13 +79,15 @@ const Header: React.FC = () => {
                                 </li>
                             ))}
                             <li>
-                                <a 
-                                    href="#contact"
-                                    onClick={(e) => handleNavClick(e, '#contact')}
-                                    className="btn-shine ml-4 text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2.5 rounded-full font-medium cursor-hover inline-block shadow-lg shadow-indigo-600/20"
-                                >
-                                    Contact
-                                </a>
+                                <MagneticButton>
+                                    <a 
+                                        href="#contact"
+                                        onClick={(e) => handleNavClick(e, '#contact')}
+                                        className="btn-shine ml-4 text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2.5 rounded-full font-medium cursor-hover inline-block shadow-lg shadow-indigo-600/20"
+                                    >
+                                        Contact
+                                    </a>
+                                </MagneticButton>
                             </li>
                             <li>
                                 <button 

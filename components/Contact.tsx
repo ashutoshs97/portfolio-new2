@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 const Contact: React.FC = () => {
     const [status, setStatus] = useState<string>('');
@@ -22,6 +23,7 @@ const Contact: React.FC = () => {
             });
 
             if (response.ok) {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 setStatus("Thanks for your submission! I'll get back to you soon.");
                 setStatusType('success');
                 form.reset();

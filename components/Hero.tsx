@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useClickSound } from '../hooks/useSound';
-import { motion, AnimatePresence, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { motion, AnimatePresence, useTransform, useSpring, useMotionValue, useScroll } from 'framer-motion';
 import { ArrowDown, Layout, MousePointer2 } from 'lucide-react';
+import MagneticButton from './MagneticButton';
 
 const Hero: React.FC = () => {
     const [currentVerbIndex, setCurrentVerbIndex] = useState(0);
@@ -12,6 +13,19 @@ const Hero: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+
+    const { scrollY } = useScroll();
+    const scrollParallax1 = useTransform(scrollY, [0, 1000], [0, -200]);
+    const scrollParallax2 = useTransform(scrollY, [0, 1000], [0, -350]);
+    const scrollParallax3 = useTransform(scrollY, [0, 1000], [0, -100]);
+
+    // Live Availability Time
+    const [time, setTime] = useState(new Date());
+    useEffect(() => {
+        const timer = setInterval(() => setTime(new Date()), 60000);
+        return () => clearInterval(timer);
+    }, []);
+    const timeString = time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -51,9 +65,17 @@ const Hero: React.FC = () => {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
             {/* Parallax Blobs */}
-            <motion.div style={{ x: xReverse, y: yReverse }} className="absolute top-20 left-10 w-[500px] h-[500px] bg-purple-400/30 dark:bg-purple-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob" />
-            <motion.div style={{ x, y }} className="absolute top-40 right-10 w-[500px] h-[500px] bg-indigo-400/30 dark:bg-indigo-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-2000" />
-            <motion.div style={{ x: xReverse, y }} className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] bg-pink-400/30 dark:bg-pink-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-4000" />
+            <motion.div style={{ y: scrollParallax1 }} className="absolute inset-0 pointer-events-none">
+                <motion.div style={{ x: xReverse, y: yReverse }} className="absolute top-20 left-10 w-[500px] h-[500px] bg-purple-400/30 dark:bg-purple-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob" />
+            </motion.div>
+            
+            <motion.div style={{ y: scrollParallax2 }} className="absolute inset-0 pointer-events-none">
+                <motion.div style={{ x, y }} className="absolute top-40 right-10 w-[500px] h-[500px] bg-indigo-400/30 dark:bg-indigo-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-2000" />
+            </motion.div>
+
+            <motion.div style={{ y: scrollParallax3 }} className="absolute inset-0 pointer-events-none">
+                <motion.div style={{ x: xReverse, y }} className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] bg-pink-400/30 dark:bg-pink-900/40 rounded-full mix-blend-multiply filter blur-[100px] opacity-40 animate-blob animation-delay-4000" />
+            </motion.div>
 
             {/* Floating Glass Elements */}
             <motion.div 
@@ -85,12 +107,12 @@ const Hero: React.FC = () => {
             <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="text-left md:text-center max-w-5xl mx-auto">
                     
-                    {/* Status Badge */}
+                    {/* Status Badge & Live Time */}
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="flex justify-start md:justify-center mb-8"
+                        className="flex flex-wrap justify-start md:justify-center items-center gap-3 mb-8"
                     >
                          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-sm font-semibold shadow-sm backdrop-blur-sm">
                             <span className="relative flex h-2.5 w-2.5">
@@ -98,6 +120,9 @@ const Hero: React.FC = () => {
                                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500"></span>
                             </span>
                             Open to new opportunities
+                        </span>
+                        <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-gray-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-medium shadow-sm">
+                            Local Time: {timeString}
                         </span>
                     </motion.div>
 
@@ -147,30 +172,36 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.6, delay: 0.5 }}
                         className="flex flex-col sm:flex-row gap-5 justify-center items-center"
                     >
-                        <a 
-                            href="#projects" 
-                            onClick={handleScrollToProjects}
-                            className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-slate-900 dark:bg-white px-8 text-base font-bold text-white dark:text-slate-900 transition-all duration-300 hover:w-full sm:hover:w-auto hover:scale-105 hover:shadow-[0_0_20px_rgba(79,70,229,0.3)] cursor-hover"
-                        >
-                            <span className="mr-2">Explore Projects</span>
-                            <ArrowDown className="transition-transform group-hover:translate-y-1" size={20} />
-                            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                        </a>
-                        <a 
-                            href="https://linkly.link/29k4Z" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="inline-flex h-14 items-center justify-center rounded-full border-2 border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 px-8 text-base font-bold text-indigo-700 dark:text-indigo-300 transition-all hover:bg-indigo-100 dark:hover:bg-indigo-900/40 cursor-hover shadow-[0_0_15px_rgba(79,70,229,0.2)]"
-                        >
-                            Download Resume
-                        </a>
-                        <a 
-                            href="#contact" 
-                            onClick={(e) => { e.preventDefault(); playSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} 
-                            className="inline-flex h-14 items-center justify-center rounded-full border-2 border-slate-200 dark:border-slate-800 bg-transparent px-8 text-base font-bold text-slate-900 dark:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-hover"
-                        >
-                            Contact Me
-                        </a>
+                        <MagneticButton>
+                            <a 
+                                href="#projects" 
+                                onClick={handleScrollToProjects}
+                                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full bg-slate-900 dark:bg-white px-8 text-base font-bold text-white dark:text-slate-900 transition-all duration-300 hover:w-full sm:hover:w-auto hover:scale-105 hover:shadow-[0_0_20px_rgba(79,70,229,0.3)] cursor-hover"
+                            >
+                                <span className="mr-2">Explore Projects</span>
+                                <ArrowDown className="transition-transform group-hover:translate-y-1" size={20} />
+                                <div className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                            </a>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <a 
+                                href="https://linkly.link/29k4Z" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex h-14 items-center justify-center rounded-full border-2 border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 px-8 text-base font-bold text-indigo-700 dark:text-indigo-300 transition-all hover:bg-indigo-100 dark:hover:bg-indigo-900/40 cursor-hover shadow-[0_0_15px_rgba(79,70,229,0.2)]"
+                            >
+                                Download Resume
+                            </a>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <a 
+                                href="#contact" 
+                                onClick={(e) => { e.preventDefault(); playSound(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} 
+                                className="inline-flex h-14 items-center justify-center rounded-full border-2 border-slate-200 dark:border-slate-800 bg-transparent px-8 text-base font-bold text-slate-900 dark:text-white transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 cursor-hover"
+                            >
+                                Contact Me
+                            </a>
+                        </MagneticButton>
                     </motion.div>
                 </div>
             </div>

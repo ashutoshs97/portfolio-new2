@@ -19,6 +19,52 @@ const projects: Project[] = [
     { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', image: 'images/FlowDance Landing Page.webp' },
 ];
 
+const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+
+    return (
+        <motion.div
+            layout
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.4 }}
+            onMouseMove={handleMouseMove}
+            className="group relative rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 hover:shadow-2xl transition-all duration-300 cursor-hover"
+        >
+            <div 
+               className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-20 mix-blend-overlay"
+               style={{
+                   background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.4), transparent 40%)`
+               }}
+            />
+            <div className="overflow-hidden h-64 relative bg-slate-200 dark:bg-slate-700">
+                {!isLoaded && (
+                    <div className="absolute inset-0 animate-pulse bg-slate-300 dark:bg-slate-600 z-20" />
+                )}
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
+                <img 
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    src={project.image} 
+                    alt={project.title} 
+                    onLoad={() => setIsLoaded(true)}
+                />
+            </div>
+            <div className="p-8 relative z-10">
+                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2 block">{project.category}</span>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">{project.title}</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{project.description}</p>
+            </div>
+        </motion.div>
+    );
+};
+
 const Projects: React.FC = () => {
     const [filter, setFilter] = useState<'all' | 'mobile' | 'web'>('all');
     const playSound = useClickSound();
@@ -26,7 +72,7 @@ const Projects: React.FC = () => {
     const filteredProjects = projects.filter(p => filter === 'all' || p.category === filter);
 
     return (
-        <section id="projects" className="py-24 md:py-32 bg-white dark:bg-slate-900 transition-colors duration-300 relative">
+        <section id="projects" className="py-24 md:py-32 bg-gray-50 dark:bg-[#020617] transition-colors duration-300 relative">
              <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -36,7 +82,7 @@ const Projects: React.FC = () => {
                 >
                     <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Featured Projects</h2>
                     
-                    <div className="flex justify-center space-x-2 p-1.5 bg-gray-100 dark:bg-slate-800 inline-flex rounded-full">
+                    <div className="flex justify-center space-x-2 p-1.5 bg-white dark:bg-slate-800 shadow-sm inline-flex rounded-full border border-gray-200 dark:border-slate-700">
                         {['all', 'mobile', 'web'].map((f) => (
                             <button
                                 key={f}
@@ -63,29 +109,7 @@ const Projects: React.FC = () => {
                 >
                     <AnimatePresence>
                         {filteredProjects.map((project) => (
-                            <motion.div
-                                layout
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.4 }}
-                                className="group card rounded-2xl overflow-hidden bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-300 cursor-hover"
-                            >
-                                <div className="overflow-hidden h-64 relative">
-                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
-                                    <img 
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                                        src={project.image} 
-                                        alt={project.title} 
-                                    />
-                                </div>
-                                <div className="p-8">
-                                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2 block">{project.category}</span>
-                                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">{project.title}</h3>
-                                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{project.description}</p>
-                                </div>
-                            </motion.div>
+                            <ProjectCard key={project.id} project={project} />
                         ))}
                     </AnimatePresence>
                 </motion.div>

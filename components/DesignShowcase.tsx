@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence } from 'framer-motion';
+import Marquee from 'react-fast-marquee';
 
 const designImages = [
     'images/Checkout.webp',
@@ -39,113 +40,69 @@ const designs = designImages.map((img, i) => ({
 }));
 
 const DesignShowcase: React.FC = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
     const [activeImage, setActiveImage] = useState<string | null>(null);
     const playSound = useClickSound();
 
-    const toggleExpand = () => {
+    const handleImageClick = (image: string) => {
         playSound();
-        setIsExpanded(!isExpanded);
+        setActiveImage(image);
     };
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
-    };
+    const midPoint = Math.ceil(designs.length / 2);
+    const topRow = designs.slice(0, midPoint);
+    const bottomRow = designs.slice(midPoint);
 
     return (
-        <section id="designs" className="py-24 md:py-32 bg-gray-50 dark:bg-[#020617] transition-colors duration-300">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section id="designs" className="py-24 md:py-32 bg-gray-50 dark:bg-[#020617] transition-colors duration-300 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center"
                 >
                     <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white">Design Showcase</h2>
                 </motion.div>
+            </div>
                 
-                {/* Grid */}
-                <motion.div 
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px] md:auto-rows-[200px]"
-                >
-                    <motion.div 
-                        variants={itemVariants}
-                        whileHover={{ scale: 0.98 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-md" onClick={() => setActiveImage(designs[0].image)}
-                    >
-                        <img src={designs[0].image} alt="Design 1" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    </motion.div>
-                    <motion.div 
-                         variants={itemVariants}
-                         whileHover={{ scale: 0.98 }}
-                         whileTap={{ scale: 0.95 }}
-                        className="md:col-span-2 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-md" onClick={() => setActiveImage(designs[1].image)}
-                    >
-                        <img src={designs[1].image} alt="Design 2" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    </motion.div>
-                    <motion.div 
-                         variants={itemVariants}
-                         whileHover={{ scale: 0.98 }}
-                         whileTap={{ scale: 0.95 }}
-                        className="md:col-span-1 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-md" onClick={() => setActiveImage(designs[2].image)}
-                    >
-                        <img src={designs[2].image} alt="Design 3" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    </motion.div>
-                    <motion.div 
-                         variants={itemVariants}
-                         whileHover={{ scale: 0.98 }}
-                         whileTap={{ scale: 0.95 }}
-                        className="md:col-span-1 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-md" onClick={() => setActiveImage(designs[3].image)}
-                    >
-                        <img src={designs[3].image} alt="Design 4" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                    </motion.div>
-                    
-                    {/* Expanded Items */}
-                    <AnimatePresence>
-                        {isExpanded && designs.slice(4).map((design) => (
-                            <motion.div 
-                                key={design.id}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ duration: 0.3 }}
-                                className="relative group overflow-hidden rounded-2xl h-[200px] cursor-zoom-in shadow-md" 
-                                onClick={() => setActiveImage(design.image)}
-                            >
+            {/* Infinite Marquees */}
+            <div className="w-full">
+                <Marquee gradient={false} speed={40} pauseOnHover={true} className="mb-8 overflow-hidden py-4">
+                    {topRow.map((design) => (
+                        <div 
+                            key={design.id} 
+                            onClick={() => handleImageClick(design.image)}
+                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px] transition-transform duration-300 hover:scale-[1.02]"
+                        >
+                            <div className="w-full h-full rounded-xl overflow-hidden relative">
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
                                 <img src={design.image} alt={`Design ${design.id}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                            </div>
+                        </div>
+                    ))}
+                </Marquee>
 
-                <div className="text-center mt-12 space-y-6">
-                    <button 
-                        onClick={toggleExpand}
-                        className="btn-shine text-indigo-600 dark:text-indigo-400 bg-transparent border-2 border-indigo-600 dark:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 px-8 py-3 rounded-full font-bold cursor-hover inline-block transition-colors"
-                    >
-                        {isExpanded ? 'Show Less' : 'Expand More'}
-                    </button>
-                    <div className="block">
-                         <a href="https://www.behance.net" target="_blank" rel="noreferrer" className="text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 font-medium cursor-hover inline-block underline underline-offset-4 decoration-2">
-                            View Full Portfolio on Behance
-                        </a>
-                    </div>
+                <Marquee gradient={false} speed={35} direction="right" pauseOnHover={true} className="overflow-hidden py-4">
+                    {bottomRow.map((design) => (
+                        <div 
+                            key={design.id} 
+                            onClick={() => handleImageClick(design.image)}
+                            className="mx-4 relative group overflow-hidden rounded-2xl cursor-zoom-in shadow-lg bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 p-2 w-[280px] h-[220px] md:w-[350px] md:h-[280px] transition-transform duration-300 hover:scale-[1.02]"
+                        >
+                            <div className="w-full h-full rounded-xl overflow-hidden relative">
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
+                                <img src={design.image} alt={`Design ${design.id}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            </div>
+                        </div>
+                    ))}
+                </Marquee>
+            </div>
+
+            <div className="text-center mt-12 space-y-6">
+                <div className="block mt-4">
+                     <a href="https://www.behance.net" target="_blank" rel="noreferrer" className="nav-link text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 font-medium cursor-hover inline-block pb-1">
+                        View Full Portfolio on Behance
+                    </a>
                 </div>
             </div>
 
@@ -156,7 +113,7 @@ const DesignShowcase: React.FC = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl flex items-center justify-center z-50 p-4 cursor-pointer"
+                        className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl flex items-center justify-center z-[100] p-4 cursor-pointer"
                         onClick={() => setActiveImage(null)}
                     >
                         <motion.img 
