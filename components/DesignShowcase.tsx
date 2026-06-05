@@ -25,13 +25,13 @@ const designImages = [
     'images/saltoris.webp',
     'images/sign-up-page.webp',
     'images/testcase.webp',
-    'images/Louvre Dating App.webp',
+    // 'images/Louvre Dating App.webp',
     'images/Napworks Website.webp',
-    'images/SI Track Landing Page.webp',
-    'images/SI Track Web Admin Dashboard for Virtual Inspection.webp',
-    'images/SI Track Web Admin Dashboard.webp',
-    'images/Virtual Inspection App Design.webp',
-    'images/FlowDance Landing Page.webp'
+    // 'images/SI Track Landing Page.webp',
+    // 'images/SI Track Web Admin Dashboard for Virtual Inspection.webp',
+    // 'images/SI Track Web Admin Dashboard.webp',
+    // 'images/Virtual Inspection App Design.webp',
+    // 'images/FlowDance Landing Page.webp'
 ];
 
 const designs = designImages.map((img, i) => ({
