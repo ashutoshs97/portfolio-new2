@@ -15,6 +15,7 @@ import CustomCursor from './components/CustomCursor';
 import NotFound from './components/NotFound';
 import Preloader from './components/Preloader';
 import Chatbot from './components/Chatbot';
+import AtAGlancePopup from './components/AtAGlancePopup';
 import Lenis from 'lenis';
 
 const Home: React.FC = () => {
@@ -122,6 +123,7 @@ const AppContent: React.FC = () => {
             <div id="progress-bar"></div>
             <CustomCursor />
             <Chatbot />
+            <AtAGlancePopup />
             
             {isPreloading ? (
                 <Preloader onComplete={() => setIsPreloading(false)} />

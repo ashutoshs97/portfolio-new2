@@ -2,32 +2,46 @@ import React, { useState, useRef } from 'react';
 import { Project } from '../types';
 import { useClickSound } from '../hooks/useSound';
 import { motion, AnimatePresence, useScroll, useVelocity, useSpring, useTransform } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const projects: Project[] = [
-    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', image: 'images/saltoris-mobile-design.webp' },
-    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', image: 'images/pennyupp-app-design.webp' },
-    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', image: 'images/bondspe-website-redesign.webp' },
-    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', image: 'images/saltoris-web-design.webp' },
-    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', image: 'images/bondspe-app.webp' },
-    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', image: 'images/profit-plum-website.webp' },
-    // { id: 7, title: 'Louvre Dating App', category: 'mobile', description: 'UI/UX design for a modern dating application.', image: 'images/Louvre Dating App.webp' },
-    { id: 8, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', image: 'images/Napworks Website.webp' },
-    // { id: 9, title: 'SI Track Landing Page', category: 'web', description: 'Landing page design for the SI Track platform.', image: 'images/SI Track Landing Page.webp' },
-    // { id: 10, title: 'SI Track Virtual Inspection Dashboard', category: 'web', description: 'Web admin dashboard interface for virtual inspections.', image: 'images/SI Track Web Admin Dashboard for Virtual Inspection.webp' },
-    // { id: 11, title: 'SI Track Admin Dashboard', category: 'web', description: 'Comprehensive web admin dashboard design.', image: 'images/SI Track Web Admin Dashboard.webp' },
-    // { id: 12, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual inspections.', image: 'images/Virtual Inspection App Design.webp' },
-    // { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', image: 'images/FlowDance Landing Page.webp' },
+    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', images: ['images/projects/saltoris-mobile/1.webp'] },
+    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', images: ['images/projects/pennyupp-app/1.webp'] },
+    { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', images: ['images/projects/bondspe-website/1.webp'] },
+    { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', images: ['images/projects/saltoris-web/1.webp'] },
+    { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', images: ['images/projects/bondspe-app/1.webp'] },
+    { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', images: ['images/projects/profit-plum-website/1.webp'] },
+    { id: 8, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', images: ['images/projects/napworks-website/1.webp', 'images/projects/napworks-website/Portfolio Hub.png'] },
+    // { id: 10, title: 'SI Track Virtual Inspection Dashboard', category: 'web', description: 'Web admin dashboard interface for virtual inspections.', images: ['images/SI Track Web Admin Dashboard for Virtual Inspection.webp'] },
+    // { id: 11, title: 'SI Track Admin Dashboard', category: 'web', description: 'Comprehensive web admin dashboard design.', images: ['images/SI Track Web Admin Dashboard.webp'] },
+    // { id: 12, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual inspections.', images: ['images/Virtual Inspection App Design.webp'] },
+    // { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', images: ['images/FlowDance Landing Page.webp'] },
 ];
 
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
+const ProjectCard: React.FC<{ project: Project; onClick: (project: Project, index: number) => void }> = ({ project, onClick }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovered, setIsHovered] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const filterId = `liquid-${project.id}`;
+    
+    const playSound = useClickSound();
 
     const handleMouseMove = (e: React.MouseEvent) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+
+    const nextImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        playSound();
+        setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+    };
+
+    const prevImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        playSound();
+        setCurrentImageIndex((prev) => (prev - 1 + project.images.length) % project.images.length);
     };
 
     return (
@@ -40,7 +54,8 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="group relative rounded-2xl overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/50 dark:border-white/10 hover:shadow-2xl transition-all duration-300 cursor-hover"
+            onClick={() => onClick(project, currentImageIndex)}
+            className="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-800/80 backdrop-blur-xl border border-slate-100 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-hover"
         >
             {/* SVG Filter for Liquid Distortion */}
             <svg className="absolute w-0 h-0 pointer-events-none">
@@ -69,13 +84,49 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
                     <div className="absolute inset-0 animate-pulse bg-slate-300 dark:bg-slate-600 z-20" />
                 )}
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10" />
-                <motion.img 
-                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    src={project.image} 
-                    alt={project.title} 
-                    onLoad={() => setIsLoaded(true)}
-                    style={{ filter: isHovered ? `url(#${filterId})` : 'none' }}
-                />
+                
+                <AnimatePresence mode="wait">
+                    <motion.img 
+                        key={currentImageIndex}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        src={project.images[currentImageIndex]} 
+                        alt={`${project.title} - Image ${currentImageIndex + 1}`} 
+                        onLoad={() => setIsLoaded(true)}
+                        style={{ filter: isHovered ? `url(#${filterId})` : 'none' }}
+                    />
+                </AnimatePresence>
+
+                {/* Carousel Controls */}
+                {project.images.length > 1 && (
+                    <>
+                        <button 
+                            onClick={prevImage}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white shadow-md border border-white/20 opacity-0 group-hover:opacity-100 transition-all cursor-hover"
+                        >
+                            <ChevronLeft size={20} />
+                        </button>
+                        <button 
+                            onClick={nextImage}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white shadow-md border border-white/20 opacity-0 group-hover:opacity-100 transition-all cursor-hover"
+                        >
+                            <ChevronRight size={20} />
+                        </button>
+                        
+                        {/* Dots */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-md">
+                            {project.images.map((_, i) => (
+                                <div 
+                                    key={i} 
+                                    className={`h-1.5 rounded-full transition-all shadow-sm ${i === currentImageIndex ? 'w-4 bg-white' : 'w-1.5 bg-white/70'}`} 
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
             </div>
             <div className="p-8 relative z-10">
                 <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2 block">{project.category}</span>
@@ -88,6 +139,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
 
 const Projects: React.FC = () => {
     const [filter, setFilter] = useState<'all' | 'mobile' | 'web'>('all');
+    const [activeProject, setActiveProject] = useState<{ project: Project; index: number } | null>(null);
     const playSound = useClickSound();
     
     const { scrollY } = useScroll();
@@ -142,11 +194,61 @@ const Projects: React.FC = () => {
                 >
                     <AnimatePresence>
                         {filteredProjects.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
+                            <ProjectCard key={project.id} project={project} onClick={(p, idx) => { playSound(); setActiveProject({ project: p, index: idx }); }} />
                         ))}
                     </AnimatePresence>
                 </motion.div>
             </div>
+
+            {/* Lightbox */}
+            <AnimatePresence>
+                {activeProject && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl flex items-center justify-center z-[100] p-4 cursor-pointer"
+                        onClick={() => setActiveProject(null)}
+                    >
+                        <motion.img 
+                            key={activeProject.index}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            src={activeProject.project.images[activeProject.index]} 
+                            alt={`Enlarged ${activeProject.project.title}`} 
+                            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                        />
+                        <button className="absolute top-6 right-8 text-white/50 hover:text-white text-5xl font-light cursor-hover transition-colors">&times;</button>
+                        
+                        {activeProject.project.images.length > 1 && (
+                            <>
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        playSound();
+                                        setActiveProject(prev => prev ? { ...prev, index: (prev.index - 1 + prev.project.images.length) % prev.project.images.length } : null);
+                                    }}
+                                    className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 p-3 md:p-4 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all cursor-hover shadow-lg"
+                                >
+                                    <ChevronLeft size={32} />
+                                </button>
+                                <button 
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        playSound();
+                                        setActiveProject(prev => prev ? { ...prev, index: (prev.index + 1) % prev.project.images.length } : null);
+                                    }}
+                                    className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 p-3 md:p-4 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 transition-all cursor-hover shadow-lg"
+                                >
+                                    <ChevronRight size={32} />
+                                </button>
+                            </>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 };

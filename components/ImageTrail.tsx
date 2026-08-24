@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const images = [
-    'images/bondspe-app.webp',
-    'images/saltoris-mobile-design.webp',
-    'images/profit-plum-website.webp',
+    'images/projects/bondspe-app/1.webp',
+    'images/projects/saltoris-mobile/1.webp',
+    'images/projects/profit-plum-website/1.webp',
     'images/Louvre Dating App.webp',
     'images/SI Track Landing Page.webp',
 ];
