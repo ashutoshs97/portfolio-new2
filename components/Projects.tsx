@@ -5,17 +5,21 @@ import { motion, AnimatePresence, useScroll, useVelocity, useSpring, useTransfor
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const projects: Project[] = [
-    { id: 1, title: 'Saltoris Mobile Design', category: 'mobile', description: 'Mobile application design for a water utility service.', images: ['images/projects/saltoris-mobile/1.webp'] },
-    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application.', images: ['images/projects/pennyupp-app/1.webp'] },
+    { id: 1, title: 'Water Bill Management App', category: 'mobile', description: 'Mobile application design for municipal water utility services, digital bill payments, and smart connection management.', images: ['images/Modern Water Bill Management App Mockup.png'] },
+    { id: 2, title: 'Penny Upp App Design', category: 'mobile', description: 'UI/UX design for a micro-investing mobile application enabling automated spare change savings and mutual fund growth.', images: ['images/Pennyupp Smart Investing App Showcase.png'] },
     { id: 3, title: 'Bondspe Website Redesign', category: 'web', description: 'A complete redesign of the Bondspe investment platform website.', images: ['images/projects/bondspe-website/1.webp'] },
     { id: 4, title: 'Saltoris Web Design', category: 'web', description: 'Web interface for the Saltoris water utility management system.', images: ['images/projects/saltoris-web/1.webp'] },
     { id: 5, title: 'Bondspe App Redesign', category: 'mobile', description: 'A fresh take on the Bondspe mobile application interface.', images: ['images/projects/bondspe-app/1.webp'] },
     { id: 6, title: 'Profit Plum Website Design', category: 'web', description: 'UI/UX design for the Profit Plum financial services website.', images: ['images/projects/profit-plum-website/1.webp'] },
-    { id: 8, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', images: ['images/projects/napworks-website/1.webp', 'images/projects/napworks-website/Portfolio Hub.png'] },
-    // { id: 10, title: 'SI Track Virtual Inspection Dashboard', category: 'web', description: 'Web admin dashboard interface for virtual inspections.', images: ['images/SI Track Web Admin Dashboard for Virtual Inspection.webp'] },
-    // { id: 11, title: 'SI Track Admin Dashboard', category: 'web', description: 'Comprehensive web admin dashboard design.', images: ['images/SI Track Web Admin Dashboard.webp'] },
-    // { id: 12, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual inspections.', images: ['images/Virtual Inspection App Design.webp'] },
-    // { id: 13, title: 'FlowDance Landing Page', category: 'web', description: 'Dynamic and engaging landing page design.', images: ['images/FlowDance Landing Page.webp'] },
+    { id: 7, title: 'Napworks Website', category: 'web', description: 'A sleek and responsive corporate website design.', images: ['images/projects/napworks-website/1.webp', 'images/projects/napworks-website/Portfolio Hub.png'] },
+    { id: 8, title: 'Inspectage Smart Inspection Dashboard', category: 'web', description: 'Web and tablet dashboard for construction inspection management with 3D digital-twin models and real-time compliance.', images: ['images/Inspectage Smart Inspection Dashboard.png', 'images/Inspectage Construction Inspection Dashboard.png'] },
+    { id: 9, title: 'MySI Inspection Platform', category: 'web', description: 'Comprehensive inspection management platform to schedule requests, manage project lots, and track real-time project reports.', images: ['images/MySI Inspection Management Showcase.png'] },
+    { id: 10, title: 'League Dating App', category: 'mobile', description: 'UI/UX design for an exclusive modern dating mobile application featuring verified profiles, curated matchmaking, and premium membership.', images: ['images/League Dating App Hero Mockup.png'] },
+    { id: 11, title: 'Virtual Inspection App', category: 'mobile', description: 'Mobile application interface for remote virtual construction inspections, live streaming, and real-time site verification.', images: ['images/Virtual Inspection App Design.webp'] },
+    { id: 12, title: 'Flow Dance Connect', category: 'mobile', description: 'Dynamic community and booking platform for dancers, instructors, and studios to explore classes, learn routines, and book events.', images: ['images/Flow Dance Connect_ Learn and Connect.png', 'images/FlowDance Landing Page.webp'] },
+    { id: 13, title: 'How Can I Help - Volunteer App', category: 'mobile', description: 'Community-driven volunteer mobile application empowering individuals to find local causes, support shelters, and create big impact.', images: ['images/How Can I Help_ Volunteer App Showcase.png', 'images/How Can I Help_ Small Actions, Big Impact.png'] },
+    { id: 14, title: 'Stedorey Global Shopping', category: 'web', description: 'Cross-border e-commerce and international package forwarding platform with live parcel tracking and transparent pricing.', images: ['images/Global Shopping, Simplified.png'] },
+    { id: 15, title: 'Teleios Christian App', category: 'mobile', description: 'Mobile application design for faith-based learning and community, featuring devotionals, biblical studies, and multimedia teachings.', images: ['images/Teleios Christian App Hero Showcase.png'] },
 ];
 
 const ProjectCard: React.FC<{ project: Project; onClick: (project: Project, index: number) => void }> = ({ project, onClick }) => {

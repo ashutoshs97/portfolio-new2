@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const images = [
     'images/projects/bondspe-app/1.webp',
-    'images/projects/saltoris-mobile/1.webp',
+    'images/Modern Water Bill Management App Mockup.png',
     'images/projects/profit-plum-website/1.webp',
-    'images/Louvre Dating App.webp',
-    'images/SI Track Landing Page.webp',
+    'images/League Dating App Hero Mockup.png',
+    'images/Pennyupp Smart Investing App Showcase.png',
 ];
 
 interface TrailImage {

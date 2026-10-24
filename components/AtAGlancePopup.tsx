@@ -6,7 +6,7 @@ import { useClickSound } from '../hooks/useSound';
 const featuredProjects = [
     { id: 1, title: 'Profit Plum Website', image: 'images/projects/profit-plum-website/1.webp' },
     { id: 2, title: 'Bondspe App', image: 'images/projects/bondspe-app/1.webp' },
-    { id: 3, title: 'Saltoris Mobile', image: 'images/projects/saltoris-mobile/1.webp' },
+    { id: 3, title: 'Water Bill App', image: 'images/Modern Water Bill Management App Mockup.png' },
     { id: 4, title: 'Napworks Website', image: 'images/projects/napworks-website/1.webp' },
 ];
 
